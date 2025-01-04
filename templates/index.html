@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CNN Modèle pour Classification des Fruits</title>
+    <style>
+        /* Styles généraux */
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #b0b0b0;
+        }
+
+        /* Formulaire */
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            background-color: #1e1e1e;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        label {
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        input[type="file"] {
+            padding: 0.5rem;
+            font-size: 1rem;
+            border: 2px dashed #575757;
+            border-radius: 8px;
+            background-color: #2b2b2b;
+            color: #ffffff;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button {
+            background-color: #00aaff;
+            color: #ffffff;
+            padding: 0.7rem 1.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #0088cc;
+        }
+
+        /* Résultat */
+        .result {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .result h2 {
+            font-size: 1.8rem;
+            color: #00ff99;
+        }
+
+        .result img {
+            margin-top: 1rem;
+            max-width: 300px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>CNN modèle pour classification des fruits</h1>
+    <p>Ce modèle va prédire si le fruit est une banane, une pomme ou une orange :</p>
+
+    <form action="/" method="post" enctype="multipart/form-data">
+        <label for="file">Téléchargez votre image :</label>
+        <input type="file" name="file" id="file" accept="image/*">
+        <button type="submit">Analyser</button>
+    </form>
+
+    {% if class_name %}
+    <div class="result">
+        <h2>Résultat : {{ class_name }} (Confiance : {{ confidence }})</h2>
+        <img src="{{ url_for('static', filename='images/' + uploaded_image) }}" alt="Image téléchargée">
+    </div>
+    {% endif %}
+</body>
+</html>
